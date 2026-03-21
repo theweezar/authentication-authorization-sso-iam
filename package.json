@@ -1,0 +1,16 @@
+{
+  "name": "authentication-authorization-sso-iam",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "DucHoang",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
