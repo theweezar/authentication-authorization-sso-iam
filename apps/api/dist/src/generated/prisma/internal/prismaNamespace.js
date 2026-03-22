@@ -67,7 +67,11 @@ export const JsonNull = runtime.JsonNull;
  */
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
-    User: 'User'
+    User: 'User',
+    Organization: 'Organization',
+    Role: 'Role',
+    Permission: 'Permission',
+    PermissionAssignment: 'PermissionAssignment'
 };
 /**
  * Enums
@@ -77,13 +81,56 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 });
 export const UserScalarFieldEnum = {
     id: 'id',
+    organizationId: 'organizationId',
+    roleId: 'roleId',
     email: 'email',
+    phone: 'phone',
+    firstName: 'firstName',
+    lastName: 'lastName',
     passwordHash: 'passwordHash',
     createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
+};
+export const OrganizationScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    email: 'email',
+    phone: 'phone',
+    address: 'address',
+    createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+export const RoleScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
+};
+export const PermissionScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
+};
+export const PermissionAssignmentScalarFieldEnum = {
+    id: 'id',
+    roleId: 'roleId',
+    permissionId: 'permissionId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    createdById: 'createdById'
 };
 export const SortOrder = {
     asc: 'asc',
     desc: 'desc'
+};
+export const NullsOrder = {
+    first: 'first',
+    last: 'last'
 };
 export const defineExtension = runtime.Extensions.defineExtension;

@@ -37,7 +37,11 @@ export class AuthService {
 
   async authenticate(email: string, password: string): Promise<AuthenticatedUser> {
     const user = await this.validateCredentials(email, password);
-    const token = this.tokenService.generateToken({ userId: user.id });
+    const token = this.tokenService.generateToken({
+      userId: user.id,
+      role: user.roleName,
+      permissions: user.permissions,
+    });
 
     return {
       token,

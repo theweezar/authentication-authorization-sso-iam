@@ -8,9 +8,70 @@ datasource db {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  email        String   @unique
-  passwordHash String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id                          String                 @id @default(cuid())
+  organizationId              String
+  roleId                      String
+  email                       String                 @unique
+  phone                       String                 @unique
+  firstName                   String?
+  lastName                    String?
+  passwordHash                String
+  createdAt                   DateTime               @default(now())
+  updatedAt                   DateTime               @updatedAt
+  createdById                 String?
+  organization                Organization           @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  role                        Role                   @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  createdBy                   User?                  @relation("UserCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  createdUsers                User[]                 @relation("UserCreatedBy")
+  createdRoles                Role[]                 @relation("RoleCreatedBy")
+  createdPermissions          Permission[]           @relation("PermissionCreatedBy")
+  createdPermissionAssignments PermissionAssignment[] @relation("PermissionAssignmentCreatedBy")
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String   @unique
+  address   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  users     User[]
+}
+
+model Role {
+  id                    String                 @id @default(cuid())
+  name                  String                 @unique
+  description           String?
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  createdById           String?
+  createdBy             User?                  @relation("RoleCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  users                 User[]
+  permissionAssignments PermissionAssignment[]
+}
+
+model Permission {
+  id                    String                 @id @default(cuid())
+  name                  String                 @unique
+  description           String
+  createdAt             DateTime               @default(now())
+  updatedAt             DateTime               @updatedAt
+  createdById           String?
+  createdBy             User?                  @relation("PermissionCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+  permissionAssignments PermissionAssignment[]
+}
+
+model PermissionAssignment {
+  id           String     @id @default(cuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  createdById  String?
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  createdBy    User?      @relation("PermissionAssignmentCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([roleId, permissionId])
 }

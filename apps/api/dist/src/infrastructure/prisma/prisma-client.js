@@ -7,3 +7,4 @@ export const createPrismaClient = () => {
     });
     return new PrismaClient({ adapter });
 };
+export const prisma = createPrismaClient();

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Organization</title>
+  <link rel="stylesheet" href="/static/css/organization.css" />
+</head>
+
+<body>
+  <main class="page-shell">
+    <section class="panel">
+      <p class="eyebrow">Organization Setup</p>
+      <h1>Create your organization</h1>
+      <p class="intro">
+        This creates the organization and an initial SuperAdmin account that uses the same
+        email and phone number.
+      </p>
+
+      {{#if error}}
+      <div class="alert">{{error}}</div>
+      {{/if}}
+
+      <form method="post" action="/organizations" class="organization-form">
+        <label>
+          <span>Organization name</span>
+          <input autocomplete="name" name="name" type="text" value="{{values.name}}" required />
+        </label>
+
+        <label>
+          <span>Email</span>
+          <input autocomplete="email" name="email" type="email" value="{{values.email}}" required />
+        </label>
+
+        <label>
+          <span>Phone</span>
+          <input autocomplete="mobile" name="phone" type="text" value="{{values.phone}}" required />
+        </label>
+
+        <label>
+          <span>Address</span>
+          <input autocomplete="address-line1" name="address" type="text" value="{{values.address}}" required />
+        </label>
+
+        <button type="submit">Create organization</button>
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>

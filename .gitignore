@@ -3,3 +3,6 @@
 /ignore
 /postman
 .postman
+apps/api/dist
+apps/api/dev.db
+apps/api/.env

@@ -13,9 +13,17 @@ export class JwtTokenService {
     }
     verifyToken(token) {
         const payload = jwt.verify(token, this.secret);
-        if (!payload || typeof payload === "string" || typeof payload.userId !== "string") {
+        if (!payload ||
+            typeof payload === "string" ||
+            typeof payload.userId !== "string" ||
+            typeof payload.role !== "string" ||
+            !Array.isArray(payload.permissions)) {
             throw new Error("Invalid token payload.");
         }
-        return { userId: payload.userId };
+        return {
+            userId: payload.userId,
+            role: payload.role,
+            permissions: payload.permissions.filter((permission) => typeof permission === "string"),
+        };
     }
 }

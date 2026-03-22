@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organization Created</title>
+    <link rel="stylesheet" href="/static/css/organization.css" />
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="panel">
+        <p class="eyebrow">Organization Ready</p>
+        <h1>{{organization.name}} has been created</h1>
+        <p class="intro">
+          The SuperAdmin account was created with the organization email and phone. The password
+          below is shown only once.
+        </p>
+
+        <dl class="summary">
+          <div>
+            <dt>Email</dt>
+            <dd>{{superAdminUser.email}}</dd>
+          </div>
+          <div>
+            <dt>Phone</dt>
+            <dd>{{superAdminUser.phone}}</dd>
+          </div>
+        </dl>
+
+        <div class="password-card">
+          <p class="password-label">Generated SuperAdmin password</p>
+          <code id="generated-password">{{generatedPassword}}</code>
+          <button type="button" id="copy-password-button">Copy password</button>
+          <p id="copy-status" class="copy-status" aria-live="polite"></p>
+        </div>
+
+        <a class="secondary-link" href="/organizations/new">Create another organization</a>
+      </section>
+    </main>
+
+    <script src="/static/js/password-copy.js"></script>
+  </body>
+</html>

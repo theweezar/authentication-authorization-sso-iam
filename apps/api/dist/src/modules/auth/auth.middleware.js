@@ -31,4 +31,18 @@ export class AuthMiddleware {
         }
         next();
     };
+    requireRole = (...roles) => (request, _response, next) => {
+        if (!request.auth || !roles.includes(request.auth.role)) {
+            next(new AppError("You are not allowed to access this resource.", 403));
+            return;
+        }
+        next();
+    };
+    requireSelfOrRole = (...roles) => (request, response, next) => {
+        if (request.auth && request.auth.userId === request.params.userId) {
+            next();
+            return;
+        }
+        this.requireRole(...roles)(request, response, next);
+    };
 }

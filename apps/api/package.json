@@ -13,7 +13,7 @@
     "prisma:generate": "node ../../node_modules/prisma/build/index.js generate --schema prisma/schema.prisma",
     "prisma:push": "node ../../node_modules/prisma/build/index.js db push --schema prisma/schema.prisma",
     "start": "set TS_NODE_TRANSPILE_ONLY=true&& node --env-file=.env --loader ts-node/esm index.ts",
-    "test": "node --test dist/src/tests/user.service.test.js dist/src/tests/auth.service.test.js"
+    "test": "node --test dist/src/tests/organization.service.test.js dist/src/tests/user.service.test.js dist/src/tests/permission.service.test.js dist/src/tests/auth.service.test.js"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.5.0",

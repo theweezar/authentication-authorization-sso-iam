@@ -8,17 +8,17 @@ export const createUserRouter = (
 ): Router => {
   const router = Router();
 
-  router.post("/", userController.createUser);
+  router.post("/", authMiddleware.requireJwt, authMiddleware.requireRole("SuperAdmin", "Admin"), userController.createUser);
   router.patch(
     "/:userId",
     authMiddleware.requireJwt,
-    authMiddleware.requireSelf,
+    authMiddleware.requireSelfOrRole("SuperAdmin", "Admin"),
     userController.updateUser,
   );
   router.delete(
     "/:userId",
     authMiddleware.requireJwt,
-    authMiddleware.requireSelf,
+    authMiddleware.requireRole("SuperAdmin", "Admin"),
     userController.deleteUser,
   );
 
